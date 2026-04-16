@@ -89,6 +89,7 @@ body {
   text-align: center;
   margin-top: 2rem;
   font-size: 1.2rem;
+  text-shadow: 0 0 2.5px #ff00a6;
 }
 
 .inicio-txt2 {
@@ -97,6 +98,7 @@ body {
   margin-top: 0.5rem;
   font-size: 1rem;
   margin-bottom: 1.5rem;
+  
 }
 
 .serviço-txt {
@@ -104,6 +106,12 @@ body {
   text-align: center;
   margin-top: 3.5rem;
   font-size: 1rem;
+
+}
+
+.serviço-txt:hover {
+  text-shadow: #ffffff 0px 0px 2.5px;
+  transition: 0.3s;
 }
 
 .servico {
@@ -186,7 +194,44 @@ body {
 .img-grid1:hover {
   opacity: 80%;
   transition: 0.3s;
+  cursor: pointer;
 }
+
+
+@keyframes neon {
+    0%, 100% { text-shadow: 0 0 5px #fb99d9;}
+}
+
+@keyframes neon2 {
+    0%, 100% { text-shadow: 0 0 5px #ffffff;}
+}
+.cabelos{
+  position: absolute;
+  color: white;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  margin-left: 55rem;
+  margin-bottom: 10rem;
+  color: #d50080;
+  cursor: pointer;
+  font-weight: bold;
+  animation: neon 1.5s infinite alternate;
+}
+
+.img-grid1:hover + .cabelos {
+  opacity: 100%;
+  transition: 0.3s;
+}
+
+.cabelos:hover {
+  color: rgb(27, 14, 5);
+  transition: 0.3s;
+  opacity: 1;
+  animation: neon2 1.5s infinite alternate;
+}
+
 
 .img-grid2 {
   width: 100%;
@@ -200,6 +245,32 @@ body {
   transition: 0.3s;
 }
 
+.podologia {
+  position: absolute;
+  color: white;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  right: 103vh;
+  margin-top: 50vh;
+  color: #d50080;
+  cursor: pointer;
+  font-weight: bold;
+  animation: neon 1.5s infinite alternate;
+}
+
+.img-grid2:hover + .podologia {
+  opacity: 100%;
+  transition: 0.3s;
+}
+
+.podologia:hover {
+  color: rgb(27, 14, 5);
+  transition: 0.3s;
+  opacity: 1;
+  animation: neon2 1.5s infinite alternate;
+}
 .img-grid3 {
   width: 100%;
   max-width: 15vh;
@@ -210,4 +281,31 @@ body {
 .img-grid3:hover {
   opacity: 80%;
   transition: 0.3s;
+}
+
+.unhas {
+  position: absolute;
+  color: white;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  right: 85vh;
+  margin-top: 50vh;
+  color: #d50080;
+  cursor: pointer;
+  font-weight: bold;
+  animation: neon 1.5s infinite alternate;
+}
+
+.img-grid3:hover + .unhas {
+  opacity: 100%;
+  transition: 0.3s;
+}
+
+.unhas:hover {
+  color: rgb(27, 14, 5);
+  transition: 0.3s;
+  opacity: 1;
+  animation: neon2 1.5s infinite alternate;
 }
