@@ -63,10 +63,12 @@ body {
     margin-top: 15px;
   }
 }
+
 .img-salao:hover {
   opacity: 37%;
   transition: 1s;
 }
+
 @media (max-width: 900vh) {
   .banner-img img {
     width: 100%;
@@ -193,9 +195,11 @@ body {
   opacity: 80%;
   transition: 0.3s;
   cursor: pointer;
+  border-radius: 20px;
 }
 
 @keyframes neon {
+
   0%,
   100% {
     text-shadow: 0 0 5px #fb99d9;
@@ -203,42 +207,13 @@ body {
 }
 
 @keyframes neon2 {
+
   0%,
   100% {
     text-shadow: 0 0 5px #ffffff;
   }
 }
-.cabelos {
-  position: absolute;
-  color: white;
-  opacity: 0;
-  color: #d50080;
-  left: 50%;
-  top: 110%;
-  cursor: pointer;
-  font-weight: bold;
-  animation: neon 1.5s infinite alternate;
-  width: 90%;
-  text-align: center;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  font-weight: bold;
-  font-size: 2vw;
-  margin: 0;
-  /* Permite clicar na imagem através do texto */
-}
 
-.img-grid1:hover + .cabelos {
-  opacity: 100%;
-  transition: 0.3s;
-}
-
-.cabelos:hover {
-  color: rgb(27, 14, 5);
-  transition: 0.3s;
-  opacity: 1;
-  animation: neon2 1.5s infinite alternate;
-}
 
 .img-grid2 {
   width: 100%;
@@ -250,36 +225,11 @@ body {
 .img-grid2:hover {
   opacity: 80%;
   transition: 0.3s;
-}
-
-.podologia {
-  position: absolute;
-  color: white;
-  font-size: 0.7vw;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  right: 50%;
-  left: 42.3%;
-  margin-top: 22%;
-  color: #d50080;
   cursor: pointer;
-  font-weight: bold;
-  animation: neon 1.5s infinite alternate;
-  cursor: pointer;
+  border-radius: 20px;
 }
 
-.img-grid2:hover + .podologia {
-  opacity: 100%;
-  transition: 0.3s;
-}
 
-.podologia:hover {
-  color: rgb(27, 14, 5);
-  transition: 0.3s;
-  opacity: 1;
-  animation: neon2 1.5s infinite alternate;
-}
 .img-grid3 {
   width: 100%;
   max-width: 15vh;
@@ -290,31 +240,6 @@ body {
 .img-grid3:hover {
   opacity: 80%;
   transition: 0.3s;
-}
-
-.unhas {
-  position: absolute;
-  color: white;
-  font-size: 1vw;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  right: 94vh;
-  margin-top: 50vh;
-  color: #d50080;
   cursor: pointer;
-  font-weight: bold;
-  animation: neon 1.5s infinite alternate;
-}
-
-.img-grid3:hover + .unhas {
-  opacity: 100%;
-  transition: 0.3s;
-}
-
-.unhas:hover {
-  color: rgb(27, 14, 5);
-  transition: 0.3s;
-  opacity: 1;
-  animation: neon2 1.5s infinite alternate;
+  border-radius: 20px;
 }
