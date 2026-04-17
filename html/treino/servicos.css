@@ -132,7 +132,7 @@ body {
     position: fixed;
     top: 2;
     width: 100%;
-    z-index: 1000;
+    z-index: 900;
 }
 
 .navbar-servicos .nav-links {
