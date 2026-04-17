@@ -98,7 +98,6 @@ body {
   margin-top: 0.5rem;
   font-size: 1rem;
   margin-bottom: 1.5rem;
-  
 }
 
 .serviço-txt {
@@ -106,7 +105,6 @@ body {
   text-align: center;
   margin-top: 3.5rem;
   font-size: 1rem;
-
 }
 
 .serviço-txt:hover {
@@ -181,7 +179,7 @@ body {
   width: 100%;
   height: auto;
   /* Garante que a imagem cubra o espaço sem distorcer */
-  object-fit: cover;
+  display: block;
 }
 
 .img-grid1 {
@@ -197,27 +195,37 @@ body {
   cursor: pointer;
 }
 
-
 @keyframes neon {
-    0%, 100% { text-shadow: 0 0 5px #fb99d9;}
+  0%,
+  100% {
+    text-shadow: 0 0 5px #fb99d9;
+  }
 }
 
 @keyframes neon2 {
-    0%, 100% { text-shadow: 0 0 5px #ffffff;}
+  0%,
+  100% {
+    text-shadow: 0 0 5px #ffffff;
+  }
 }
-.cabelos{
+.cabelos {
   position: absolute;
   color: white;
-  font-size: 1.2rem;
-  justify-content: center;
-  align-items: center;
   opacity: 0;
-  margin-left: 55rem;
-  margin-bottom: 10rem;
   color: #d50080;
+  left: 50%;
+  top: 110%;
   cursor: pointer;
   font-weight: bold;
   animation: neon 1.5s infinite alternate;
+  width: 90%;
+  text-align: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 2vw;
+  margin: 0;
+  /* Permite clicar na imagem através do texto */
 }
 
 .img-grid1:hover + .cabelos {
@@ -231,7 +239,6 @@ body {
   opacity: 1;
   animation: neon2 1.5s infinite alternate;
 }
-
 
 .img-grid2 {
   width: 100%;
@@ -248,16 +255,18 @@ body {
 .podologia {
   position: absolute;
   color: white;
-  font-size: 1rem;
+  font-size: 0.7vw;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  right: 103vh;
-  margin-top: 50vh;
+  right: 50%;
+  left: 42.3%;
+  margin-top: 22%;
   color: #d50080;
   cursor: pointer;
   font-weight: bold;
   animation: neon 1.5s infinite alternate;
+  cursor: pointer;
 }
 
 .img-grid2:hover + .podologia {
@@ -286,11 +295,11 @@ body {
 .unhas {
   position: absolute;
   color: white;
-  font-size: 1rem;
+  font-size: 1vw;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  right: 85vh;
+  right: 94vh;
   margin-top: 50vh;
   color: #d50080;
   cursor: pointer;
