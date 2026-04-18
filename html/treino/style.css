@@ -14,6 +14,7 @@ body {
 
 /* Navbar Estilos */
 .navbar {
+  overflow: hidden;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,17 +90,17 @@ body {
 .inicio-txt1 {
   color: #d50080;
   text-align: center;
-  margin-top: 2rem;
-  font-size: 1.2rem;
+  margin: 0 auto;
+  font-size: auto;
   text-shadow: 0 0 2.5px #ff00a6;
 }
 
 .inicio-txt2 {
   color: white;
   text-align: center;
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  margin: 0 auto;
+  font-size: auto;
+  margin-bottom: 1%;
 }
 
 .serviço-txt {
@@ -115,6 +116,7 @@ body {
 }
 
 .servico {
+  overflow: hidden;
   background-color: #d50080;
   padding: 1rem 1rem;
   border-radius: 25px 25px 0 0;
@@ -199,7 +201,6 @@ body {
 }
 
 @keyframes neon {
-
   0%,
   100% {
     text-shadow: 0 0 5px #fb99d9;
@@ -207,13 +208,11 @@ body {
 }
 
 @keyframes neon2 {
-
   0%,
   100% {
     text-shadow: 0 0 5px #ffffff;
   }
 }
-
 
 .img-grid2 {
   width: 100%;
@@ -228,7 +227,6 @@ body {
   cursor: pointer;
   border-radius: 20px;
 }
-
 
 .img-grid3 {
   width: 100%;
