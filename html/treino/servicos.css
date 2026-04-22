@@ -22,7 +22,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: 1250px;
+  max-width: 1400px;
   z-index: 1000;
 }
 
@@ -30,18 +30,61 @@ body {
   .navbar {
     flex-direction: column;
     padding: 1rem;
+    width: 100%;
+    top: 0;
+
   }
 
   .nav-links {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 1250px;
     justify-content: center;
     text-align: center;
     gap: 10%;
     margin: 0 auto;
   }
+
+  .servicos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .cabelo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+  .podologia-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+
+  }
+
+  .unhas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
 }
 
 .logo a {
@@ -79,12 +122,9 @@ body {
 
 .nav-links1 {
   display: flex;
-  justify-content: center;
-  align-items: center;
   list-style: none;
   gap: 25px;
-  max-width: 1250px;
-  margin-left: -3%;
+
 }
 
 .nav-links1 a {
@@ -95,6 +135,7 @@ body {
 
 .nav-links1 a:hover {
   color: #d50080;
+
 }
 
 /* Responsividade - Media Query */
@@ -114,22 +155,27 @@ body {
     margin-left: 0rem;
     margin-top: 0rem;
   }
+
+
 }
 
 .navbar-servicos {
+  left: 9%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  margin: 0 auto;
   padding: 1rem 0;
   position: fixed;
   top: 2;
   width: 100%;
+  max-width: 1250px;
   z-index: 900;
 }
 
 .navbar-servicos .nav-links {
-  display: flex;
+
   list-style: none;
   gap: 20px;
 }
@@ -187,7 +233,7 @@ body {
   justify-content: center;
   gap: 1rem;
   margin-top: 3rem;
-  margin-bottom: 6rem;
+  margin-bottom: 0rem;
 }
 
 .podologia-titulo {
@@ -206,7 +252,7 @@ body {
   justify-content: center;
   gap: 3rem;
   margin-top: 0rem;
-  margin-bottom: 6rem;
+  margin-bottom: 0rem;
 }
 
 .podologia-container img {
@@ -311,12 +357,10 @@ body {
 }
 
 .servico-centro {
-  margin: auto;
   justify-content: center;
   align-items: center;
   color: white;
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
-  transition: color 0.3s ease;
 }
