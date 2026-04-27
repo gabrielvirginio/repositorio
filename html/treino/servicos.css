@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-shadow: border-box;
+  box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -21,9 +21,11 @@ body {
   padding: 2rem 4rem;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  max-width: 1275px;
   z-index: 1000;
+  --navbar-height: 95px;
 }
 
 .logo a {
@@ -42,9 +44,7 @@ body {
   display: flex;
   list-style: none;
   gap: 20px;
-  max-width: 1250px;
-  justify-content: center;
-  left: center;
+  justify-content: flex-end;
 }
 
 .nav-links a {
@@ -83,12 +83,16 @@ body {
   align-items: center;
   color: white;
   position: fixed;
-  top: 16%;
+  top: 95px;
+  left: 0;
+  right: 0;
   width: 100%;
+  padding: 0.75rem 0;
   z-index: 900;
 }
 
-.navbar-servicos .nav-links {
+.navbar-servicos .nav-links1 {
+  display: flex;
   list-style: none;
   gap: 20px;
 }
@@ -270,7 +274,6 @@ body {
 }
 
 .servicos-centro a {
-  margin-left: 9%;
   justify-content: center;
   align-items: center;
   color: white;
@@ -287,13 +290,9 @@ body {
     top: 0;
   }
 
-  .navbar .servicos-centro {
-    margin-left: 34%;
-  }
-
   .nav-links {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
     gap: 10%;
     margin: 0 auto;
@@ -307,19 +306,12 @@ body {
     align-items: center;
     color: white;
     position: fixed;
-    top: 8%;
+    top: 95px;
+    left: 0;
+    right: 0;
     width: 100%;
+    padding: 0.75rem 0;
     z-index: 900;
-  }
-  .servicos-centro a {
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
   }
 
   /*servicos*/
@@ -371,26 +363,17 @@ body {
     margin-right: 3%;
   }
 
-  .inicio {
-    display: none;
-  }
-  .nav-links .sobre {
-    display: none;
-  }
-
-  .navbar .servicos-centro {
-    margin: 0 auto;
-  }
-
   .navbar-servicos {
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     position: fixed;
-    top: 23%;
-    margin-left: 0;
+    top: 140px;
+    left: 0;
+    right: 0;
     width: 100%;
+    padding: 0.75rem 0;
     z-index: 900;
   }
   .cabelo-titulo {

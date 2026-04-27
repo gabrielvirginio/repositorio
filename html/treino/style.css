@@ -87,6 +87,28 @@ body {
   }
 }
 
+@media (max-width: 170vh) {
+  .contatos {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    margin-right: 2rem;
+    flex-direction: column-reverse;
+  }
+
+  .contatos p {
+    color: white;
+    font-size: 0.8rem;
+  }
+
+  .contatos img {
+    width: 100%;
+    max-width: 15px;
+  }
+}
+
 .inicio-txt1 {
   color: #d50080;
   text-align: center;
@@ -128,7 +150,7 @@ body {
 
 .botao-agendar {
   text-decoration: none;
-  margin-top: 4rem;
+  margin-top: 0;
   background-color: white;
   color: #d50080;
   border: none;
@@ -152,6 +174,7 @@ body {
   text-align: center;
   margin-bottom: 3rem;
   cursor: pointer;
+  margin-top: 10%;
 }
 
 .agendar {
@@ -240,4 +263,70 @@ body {
   transition: 0.3s;
   cursor: pointer;
   border-radius: 20px;
+}
+
+/* Container para tornar o mapa responsivo */
+.mapa-container {
+  width: 100%;
+  max-width: 800px; /* Largura máxima do mapa */
+  margin: 0 auto; /* Centralizar */
+}
+
+/* Estilizando o iframe para preencher a div */
+.mapa-container iframe {
+  margin-top: 10%;
+  width: 100%;
+  height: 45vh;
+  border-radius: 25px; /* Bordas arredondadas */
+  border: 0px solid #ccc; /* Borda opcional */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/*.banner-img img {
+    width: 100%;
+    height: 45vh;
+    vertical-align: top;
+    padding-left: 0;
+    padding-top: 0;
+    opacity: 27%;
+    transition: opacity 1s ease-in-out;
+    object-fit: cover;
+    */
+
+.contatos {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2rem;
+  margin-bottom: 0;
+  margin-right: 2rem;
+}
+.contatos p {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.contatos img {
+  width: 100%;
+  max-width: 30px;
+}
+
+.contatos .zap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.contatos .tel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.contatos .email {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
