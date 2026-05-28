@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agendar</title>
+  </head>
+  <body>
+    <form id="formAgendamento">
+      <input type="text" id="nome" placeholder="Nome" />
+      <input type="text" id="telefone" placeholder="Telefone" />
+      <input type="text" id="servico" placeholder="Serviço" />
+      <input type="date" id="data" placeholder="Data" />
+      <input type="time" id="horario" placeholder="Horário" />
+
+      <button type="submit">Agendar</button>
+    </form>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <script>
+      const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
+
+      const clienteSupabase = window.supabase.createClient(
+        supabaseUrl,
+        supabaseKey,
+      );
+
+      document
+        .getElementById("formAgendamento")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const nome = document.getElementById("nome").value;
+
+          const telefone = document.getElementById("telefone").value;
+
+          const servico = document.getElementById("servico").value;
+
+          const dataAgendamento = document.getElementById("data").value;
+
+          const horario = document.getElementById("horario").value;
+
+          const { data, error } = await clienteSupabase
+            .from("agendamentos")
+            .insert([
+              {
+                nome,
+                telefone,
+                servico,
+                data,
+                horario,
+              },
+            ]);
+
+          if (error) {
+            console.error(error);
+            alert(JSON.stringify(error));
+          } else {
+            alert("Sucesso");
+          }
+        });
+    </script>
+  </body>
+</html>
