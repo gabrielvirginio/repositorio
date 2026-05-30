@@ -66,7 +66,7 @@ body {
 }
 
 .img-salao:hover {
-  opacity: 37%;
+  opacity: 40%;
   transition: 1s;
 }
 
@@ -98,30 +98,19 @@ body {
 }
 
 .txtbanner {
+  top: 30%;
+  left: 75%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 900px;
-  padding: 0 1.5rem;
-  text-align: center;
-  z-index: 2;
-}
-
-.txtbanner .inicio-txt1 h1,
-.txtbanner .inicio-txt2 h1 {
-  margin: 0;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  z-index: 4;
 }
 
 .inicio-txt1 h1,
 .inicio-txt2 h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 @media (max-width: 768px) {
-
   .txtbanner .inicio-txt1 h1,
   .txtbanner .inicio-txt2 h1 {
     font-size: 1.5rem;
@@ -129,7 +118,6 @@ body {
 }
 
 @media (max-width: 480px) {
-
   .txtbanner .inicio-txt1 h1,
   .txtbanner .inicio-txt2 h1 {
     font-size: 1.2rem;
@@ -159,36 +147,32 @@ body {
 }
 
 .inicio-txt1 {
-  color: #d50080;
-  text-align: center;
-  margin: 0 auto;
+  color: #ffffff;
   font-size: auto;
-  text-shadow: 0 0 2.5px #ff00a6;
 }
 
 .inicio-txt2 {
   color: white;
-  text-align: center;
-  margin: 0 auto;
   font-size: auto;
-  margin-bottom: 1%;
 }
 
 .serviço-txt {
-  color: white;
-  text-align: top;
-  margin-top: 3.5rem;
-  font-size: 1rem;
-}
-
-.serviço-txt:hover {
-  text-shadow: #ffffff 0px 0px 2.5px;
-  transition: 0.3s;
+  position: absolute;
+  color: #ffffff;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
 }
 
 .servico {
   overflow: hidden;
-  background-color: #4e4b4e;
+  background-color: #d50080;
   padding: 1rem 1rem;
   border-radius: 25px 25px 0 0;
 }
@@ -226,8 +210,6 @@ body {
   margin-top: 10%;
 }
 
-
-
 .agendar {
   text-decoration: none;
   color: #d50080;
@@ -262,30 +244,39 @@ body {
 .img-inicio {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  padding: 10px;
+  gap: 0px;
+  padding-top: 0;
+  padding: 50px;
   justify-content: center;
   align-items: stretch;
-  opacity: 0.95;
-  margin-bottom: 2.5rem;
+  opacity: 0.55;
+}
+
+.img-grid1 {
+  border-radius: 30px 0 0 30px;
+}
+
+.img-grid3 {
+  border-radius: 0 30px 30px 0;
 }
 
 .img-inicio img {
+  max-height: 500px;
   width: 100%;
-  height: 360px;
+  height: 100%;
+
   object-fit: cover;
-  border-radius: 15px;
   display: block;
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .img-grid1:hover,
 .img-grid2:hover,
 .img-grid3:hover {
-  opacity: 0.8;
-  transform: translateY(-4px);
+  opacity: 0.33;
   cursor: pointer;
-  border-radius: 20px;
 }
 
 @media (max-width: 768px) {
@@ -299,7 +290,6 @@ body {
 }
 
 @keyframes neon {
-
   0%,
   100% {
     text-shadow: 0 0 5px #fb99d9;
@@ -307,7 +297,6 @@ body {
 }
 
 @keyframes neon2 {
-
   0%,
   100% {
     text-shadow: 0 0 5px #ffffff;
@@ -316,24 +305,24 @@ body {
 
 /* Container para tornar o mapa responsivo */
 .mapa-container {
-  width: 100%;
-  max-width: 800px;
-  /* Largura máxima do mapa */
+  max-width: 400px;
   margin: 0 auto;
-  /* Centralizar */
+  margin-top: 2%;
+  padding: 35px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
 }
 
 /* Estilizando o iframe para preencher a div */
 .mapa-container iframe {
-  margin-top: 10%;
-  width: 100%;
-  height: 45vh;
-  border-radius: 25px;
-  /* Bordas arredondadas */
-  border: 0px solid #ccc;
-  /* Borda opcional */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Sombra */
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 35px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /*.banner-img img {
@@ -349,11 +338,8 @@ body {
 
 .contatos {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 2rem;
-  margin-bottom: 0;
-  margin-right: 2rem;
 }
 
 .contatos p {
@@ -368,20 +354,21 @@ body {
 
 .contatos .zap {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: stretch;
+  text-align: left;
   gap: 5px;
 }
 
 .contatos .tel {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: stretch;
+  text-align: left;
   gap: 5px;
 }
 
 .contatos .email {
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
+  text-align: left;
   gap: 5px;
 }
