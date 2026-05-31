@@ -1,100 +1,105 @@
 <!doctype html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="agendar.css" />
+    <title>Agendar</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="agendar.css">
-  <title>Agendar</title>
-</head>
-
-<body>
-  <div class="banner"></div>
-  <nav class="navbar">
-    <div class="logo">VanBeleza</div>
-    <ul class="nav-links">
-      <li><a href="./index.html">Início</a></li>
-      <li><a href="servicos.html">Serviços</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-  </nav>
-
-  <form class="formulario" id="formAgendamento">
-    <div class="linha-dupla">
-      <div class="campo">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" placeholder="Nome" />
-      </div>
-      <div class="campo">
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" placeholder="Telefone" />
-      </div>
-      <div class="campo">
-        <label for="servico">Serviço:</label>
-        <input type="text" id="servico" placeholder="Serviço" />
-      </div>
-      <div class="campo"></div>
-      <label for="data">Data:</label>
-      <input type="date" id="data" placeholder="Data" />
-      <div class="campo">
-        <label for="horario">Horário:</label>
-        <input type="time" id="horario" placeholder="Horário" />
+  <body>
+    <form class="formulario" id="formAgendamento">
+      <div class="linha-dupla">
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Nome"
+            required
+          />
+        </div>
+        <div class="campo">
+          <label for="telefone">Telefone</label>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            placeholder="Telefone"
+            required
+          />
+        </div>
+        <div class="campo">
+          <label for="servico">Serviço</label>
+          <input
+            type="text"
+            id="servico"
+            name="servico"
+            placeholder="Serviço"
+            required
+          />
+        </div>
+        <div class="campo">
+          <label for="horario">Horário</label>
+          <input type="time" id="horario" name="horario" required />
+        </div>
+        <div class="campo full-width">
+          <label for="data">Data</label>
+          <input type="date" id="data" name="data" required />
+        </div>
       </div>
       <button type="submit">Enviar</button>
+    </form>
 
-  </form>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+      const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  </div>
-  <script>
-    const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
-    const supabaseKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
+      const clienteSupabase = window.supabase.createClient(
+        supabaseUrl,
+        supabaseKey,
+      );
 
-    const clienteSupabase = window.supabase.createClient(
-      supabaseUrl,
-      supabaseKey,
-    );
+      document
+        .getElementById("formAgendamento")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-    document
-      .getElementById("formAgendamento")
-      .addEventListener("submit", async (e) => {
-        e.preventDefault();
+          const nome = document.getElementById("nome").value;
 
-        const nome = document.getElementById("nome").value;
+          const telefone = document.getElementById("telefone").value;
 
-        const telefone = document.getElementById("telefone").value;
+          const servico = document.getElementById("servico").value;
 
-        const servico = document.getElementById("servico").value;
+          const dataAgendamento = document.getElementById("data").value;
 
-        const dataAgendamento = document.getElementById("data").value;
+          const horario = document.getElementById("horario").value;
 
-        const horario = document.getElementById("horario").value;
+          const { data: resposta, error } = await clienteSupabase
+            .from("Agendamentos")
+            .insert([
+              {
+                nome,
+                telefone,
+                servico,
+                data: dataAgendamento,
+                horario,
+              },
+            ]);
 
-        const { data: resposta, error } = await clienteSupabase
-          .from("Agendamentos")
-          .insert([
-            {
-              nome,
-              telefone,
-              servico,
-              data: dataAgendamento,
-              horario,
-            },
-          ]);
+          console.log(resposta);
 
-        console.log(resposta);
-
-        if (error) {
-          console.error(error);
-          alert(JSON.stringify(error));
-        } else {
-          alert("Sucesso");
-        }
-      });
-
-  </script>
-  </div>
-</body>
-
+          if (error) {
+            console.error(error);
+            alert(JSON.stringify(error));
+          } else {
+            alert("Sucesso");
+            document.getElementById("formAgendamento").reset();
+          }
+        });
+    </script>
+  </body>
 </html>

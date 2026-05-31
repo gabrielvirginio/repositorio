@@ -1,106 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
     <title>VanBeleza</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <nav class="navbar">
-        <div class="logo">VanBeleza</div>
-        <ul class="nav-links">
-            <li><a href="./index.html">Início</a></li>
-            <li><a href="servicos.html">Serviços</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
+      <div class="logo">VanBeleza</div>
+      <ul class="nav-links">
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
-    </button>
+
     <section id="inicio">
-        <div class="banner">
-            <div class="txtbanner">
-                <div class="inicio-txt1">
-                    <h1>Aquele cuidado, que vai</h1>
-                </div>
-                <div class="inicio-txt2">
-                    <h1>transformar você!</h1>
-                </div>
-            </div>
-            <div class="banner-img">
-                <img src="./img/salao-img.png" alt="salao" class="img-salao">
-                    
+      <div class="banner">
+        <div class="txtbanner">
+          <div class="inicio-txt1">
+            <h1>Aquele cuidado, que vai</h1>
+          </div>
+          <div class="inicio-txt2">
+            <h1>transformar você.</h1>
+          </div>
         </div>
-            <div class="serviço-txt">
-                <h1>
-                    Agende já, os nossos serviços!
-                </h1>
-            </div> 
+        <div class="banner-img">
+          <img src="./img/salao-img.png" alt="salao" class="img-salao" />
         </div>
-        <div class="agendarfixo">
-            <button onclick="window.location.href='agendar.html'" class="botao-agendar">
-                <p class="agendar">Agendar</p>
-            </button>
+        <div class="serviço-txt">
+          <h1>Você tem que conhecer!</h1>
         </div>
+      </div>
+      <div class="agendarfixo">
+        <button type="button" id="openModal" class="botao-agendar">
+          <p class="agendar">Agendar</p>
+        </button>
+      </div>
 
-        <div class="img-inicio">
-            <img onclick="window.location.href='servicos.html#cabelos'" src="./img/Cabelo/cabelos-loiro.png"
-                alt="cabelo" class="img-grid1">
+      <div class="img-inicio">
+        <img
+          onclick="window.location.href = 'servicos.html#cabelos'"
+          src="./img/Cabelo/cabelos-loiro.png"
+          alt="cabelo"
+          class="img-grid1"
+        />
 
-            <img onclick="window.location.href='servicos.html#podologia'" src="./img/podologia/podologia-img2.png"
-                alt="podologia" class="img-grid2">
-            <img onclick="window.location.href='servicos.html#unhas'" src="./img/Unha/unha-em-gel2.webp" alt="unha"
-                class="img-grid3">
-        </div>           
-
+        <img
+          onclick="window.location.href = 'servicos.html#podologia'"
+          src="./img/podologia/podologia-img2.png"
+          alt="podologia"
+          class="img-grid2"
+        />
+        <img
+          onclick="window.location.href = 'servicos.html#unhas'"
+          src="./img/Unha/unha-em-gel2.webp"
+          alt="unha"
+          class="img-grid3"
+        />
+      </div>
     </section>
     <div class="servico">
-        <section id="contato">
-                        <div class="contatos">
-                <div class="zap">
-                    <img src="./img/contatos/img-zap.png" alt="WhatsApp">
-                    <p>(11) 9685-8475</p>
-                </div>
+      <section id="contato">
+        <div class="contatos">
+          <div class="zap">
+            <img src="./img/contatos/img-zap.png" alt="WhatsApp" />
+            <p>(11) 9685-8475</p>
+          </div>
 
-                <div class="tel">
-                    <img src="./img/contatos/img-tel.png" alt="telefone">
-                    <p>4002-8921</p>
-                </div>
+          <div class="tel">
+            <img src="./img/contatos/img-tel.png" alt="telefone" />
+            <p>4002-8921</p>
+          </div>
 
-                <div class="email">
-                    <img src="./img/contatos/img-email.png" alt="email">
-                    <p>agendamentosvan@vanbeleza.com</p>
-                </div>
+          <div class="email">
+            <img src="./img/contatos/img-email.png" alt="email" />
+            <p>agendamentosvan@vanbeleza.com</p>
+          </div>
+        </div>
+        <div class="mapa-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117358.89756550858!2d-46.9067009!3d-23.18969855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf24293cc00531%3A0xf686a1c1163c6bbb!2zSnVuZGlhw60gLSBBZ2xvbWVyYcOnw6NvIFVyYmFuYSBkZSBKdW5kaWHDrSwgSnVuZGlhw60gLSBTUA!5e0!3m2!1spt-BR!2sbr!4v1777240215777!5m2!1spt-BR!2sbr"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
 
-            </div>
-            <div class="mapa-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117358.89756550858!2d-46.9067009!3d-23.18969855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf24293cc00531%3A0xf686a1c1163c6bbb!2zSnVuZGlhw60gLSBBZ2xvbWVyYcOnw6NvIFVyYmFuYSBkZSBKdW5kaWHDrSwgSnVuZGlhw60gLSBTUA!5e0!3m2!1spt-BR!2sbr!4v1777240215777!5m2!1spt-BR!2sbr"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-            <div class="botao">
-                <button onclick="window.location.href='index.html'" class="botao-agendar">
-                    <p class="agendar">Voltar para cima</p>
-                </button>
-
-            </div>
-
-        </section>
-
-
+        <div class="botao">
+          <button
+            onclick="window.location.href = 'index.html'"
+            class="botao-agendar"
+          >
+            <p class="agendar">Voltar para cima</p>
+          </button>
+        </div>
+      </section>
     </div>
+
+    <div class="modal-overlay" id="agendamentoModal" aria-hidden="true">
+      <div class="modal-content">
+        <button
+          type="button"
+          class="modal-close"
+          id="closeModal"
+          aria-label="Fechar formulário"
+        >
+          ×
+        </button>
+        <h2>Agendar Atendimento</h2>
+        <form class="formulario" id="formAgendamento">
+          <div class="linha-dupla">
+            <div class="campo">
+              <label for="nome">Nome</label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Nome"
+                required
+              />
+            </div>
+            <div class="campo">
+              <label for="telefone">Telefone</label>
+              <input
+                type="text"
+                id="telefone"
+                name="telefone"
+                placeholder="Telefone"
+                required
+              />
+            </div>
+            <div class="campo">
+              <label for="servico">Serviço</label>
+              <input
+                type="text"
+                id="servico"
+                name="servico"
+                placeholder="Serviço"
+                required
+              />
+            </div>
+            <div class="campo">
+              <label for="horario">Horário</label>
+              <input type="time" id="horario" name="horario" required />
+            </div>
+            <div class="campo full-width">
+              <label for="data">Data</label>
+              <input type="date" id="data" name="data" required />
+            </div>
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
     </div>
 
-</body>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+      const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
+      const clienteSupabase = window.supabase.createClient(
+        supabaseUrl,
+        supabaseKey,
+      );
 
+      const openModal = document.getElementById("openModal");
+      const closeModal = document.getElementById("closeModal");
+      const modal = document.getElementById("agendamentoModal");
+
+      function toggleModal(show) {
+        modal.classList.toggle("active", show);
+        modal.setAttribute("aria-hidden", show ? "false" : "true");
+      }
+
+      openModal.addEventListener("click", () => toggleModal(true));
+      closeModal.addEventListener("click", () => toggleModal(false));
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          toggleModal(false);
+        }
+      });
+
+      document
+        .getElementById("formAgendamento")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const nome = document.getElementById("nome").value;
+          const telefone = document.getElementById("telefone").value;
+          const servico = document.getElementById("servico").value;
+          const dataAgendamento = document.getElementById("data").value;
+          const horario = document.getElementById("horario").value;
+
+          const { data, error } = await clienteSupabase
+            .from("Agendamentos")
+            .insert([
+              {
+                nome,
+                telefone,
+                servico,
+                data: dataAgendamento,
+                horario,
+              },
+            ]);
+
+          if (error) {
+            console.error(error);
+            alert("Erro ao enviar: " + error.message);
+            return;
+          }
+
+          alert("Agendamento registrado com sucesso!");
+          toggleModal(false);
+          event.target.reset();
+        });
+    </script>
+  </body>
 </html>

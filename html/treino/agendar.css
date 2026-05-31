@@ -1,177 +1,117 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-    font-style: normal;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
-    margin-top: 0;
-    background-color: rgb(3, 2, 0);
-}
-
-.navbar {
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #d50080b6;
-    color: white;
-    padding: 2rem 4rem;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.logo:hover {
-    color: rgb(27, 14, 5);
-    transition: 0.3s;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: white;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: rgb(27, 14, 5);
-}
-
-/* Responsividade - Media Query */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        gap: 10px;
-        margin-top: 15px;
-    }
+  min-height: 100vh;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
 }
 
 .formulario {
-    max-width: 400px;
-    margin: 0 auto;
-    margin-top: 2%;
-    padding: 35px;
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.14);
 }
 
 .linha-dupla {
-    display: flex;
-    justify-content: center;
-    gap: 7px;
-    flex-direction: column;
-
-    /* Espaço entre as colunas */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .linha-dupla .campo {
-    flex: 1;
+  flex: none;
 }
 
 .campo {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 17px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
 }
 
+.campo.full-width {
+  grid-column: 1 / -1;
+}
+
+.campo label {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 0.95rem;
+}
 
 .campo input,
 .campo textarea {
-    padding: 13px;
-    border: 1px, solid #707070;
-    border-radius: 16px;
-    font-size: 14px;
-    width: 90%;
-    box-sizing: border-box;
-    /* Garante que o padding não aumente a largura total */
-    transition: border-color 0.3s;
+  padding: 14px;
+  border: 1px solid #707070;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .campo input:focus,
 .campo textarea:focus {
-    border-color: #0066cc;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 102, 204, 0.3);
+  border-color: #d50080;
+  outline: none;
+  box-shadow: 0 0 8px rgba(213, 0, 128, 0.18);
 }
 
 .formulario button {
-    background-color: #d50080;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  width: 100%;
+  background-color: #d50080;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .formulario button:hover {
-    background-color: #611b3e;
+  background-color: #611b3e;
 }
 
 input[type="date"] {
-    padding: 10px 15px;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #333;
-    background-color: #f9f9f9;
-    outline: none;
-    width: 250px;
+  padding: 14px;
+  border: 1px solid #707070;
+  border-radius: 16px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+  background-color: #f9f9f9;
+  outline: none;
+  width: 100%;
 }
 
 input[type="date"]:focus {
-    border-color: #2980b9;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
 }
 
-
-/* Removendo as setas nativas do navegador (opcional) */
 input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    filter: invert(0.5);
-    /* Altera a cor do ícone do calendário */
+  cursor: pointer;
+  filter: invert(0.5);
 }
 
-.banner {
-    width: 100%;
-    /* Cor do texto */
-}
-
-/* Criando a imagem com opacidade baixa */
-.banner::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./img/salao-img.png');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.1;
-    /* Altere a opacidade aqui (de 0.0 a 1.0) */
-    z-index: -1;
-    /* Garante que a imagem fique atrás do conteúdo */
+@media (max-width: 640px) {
+  .linha-dupla {
+    grid-template-columns: 1fr;
+  }
 }

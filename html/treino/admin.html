@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Admin</title>
+  </head>
+  <body>
+    <h1>Agendamentos</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Serviço</th>
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody id="listaAgendamentos"></tbody>
+    </table>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <script>
+      const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
+
+      const clienteSupabase = window.supabase.createClient(
+        supabaseUrl,
+        supabaseKey,
+      );
+
+      async function carregarAgendamentos() {
+        const { data, error } = await clienteSupabase
+          .from("Agendamentos")
+          .select("id, nome, telefone, servico, data, horario");
+
+        const tabela = document.getElementById("listaAgendamentos");
+
+        data.forEach((agendamento) => {
+          tabela.innerHTML += `
+                  <tr>
+                  <td>${agendamento.nome}</td>
+                  <td>${agendamento.telefone}</td>
+                  <td>${agendamento.servico}</td>
+                  <td>${agendamento.data}</td>
+                  <td>${agendamento.horario}</td>
+                  <td>
+                      <button onclick="cancelarAgendamento(${agendamento.id})">
+                          Cancelar
+                          </button>
+                      </td>
+                  </tr>
+              `;
+        });
+      }
+      carregarAgendamentos();
+
+      async function cancelarAgendamento(id) {
+        const confirmar = confirm(
+          "Deseja realmente cancelar este agendamento?",
+        );
+
+        if (!confirmar) return;
+
+        const { error } = await clienteSupabase
+          .from("Agendamentos")
+          .delete()
+          .eq("id", id);
+
+        if (error) {
+          console.error(error);
+          alert("Erro ao cancelar.");
+        } else {
+          alert("Agendamento cancelado.");
+
+          tabela.innerHTML = "";
+          carregarAgendamentos();
+        }
+      }
+    </script>
+  </body>
+</html>
