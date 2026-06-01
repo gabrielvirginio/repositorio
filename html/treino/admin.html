@@ -15,7 +15,8 @@
           <th>Serviço</th>
           <th>Data</th>
           <th>Horário</th>
-          <th>Ações</th>
+          <th>Status</th>
+          <th>Alterar Status</th>
         </tr>
       </thead>
 
@@ -37,7 +38,7 @@
       async function carregarAgendamentos() {
         const { data, error } = await clienteSupabase
           .from("Agendamentos")
-          .select("id, nome, telefone, servico, data, horario");
+          .select("id, nome, telefone, servico, data, horario, status");
 
         const tabela = document.getElementById("listaAgendamentos");
 
@@ -49,37 +50,54 @@
                   <td>${agendamento.servico}</td>
                   <td>${agendamento.data}</td>
                   <td>${agendamento.horario}</td>
+                  <td>${agendamento.status}</td>
                   <td>
-                      <button onclick="cancelarAgendamento(${agendamento.id})">
-                          Cancelar
-                          </button>
-                      </td>
-                  </tr>
+  <select onchange="alterarStatus(${agendamento.id}, this.value)">
+
+    <option value="Pendente"
+      ${agendamento.status === "Pendente" ? "selected" : ""}>
+      Pendente
+    </option>
+
+    <option value="Confirmado"
+      ${agendamento.status === "Confirmado" ? "selected" : ""}>
+      Confirmado
+    </option>
+
+    <option value="Concluído"
+      ${agendamento.status === "Concluído" ? "selected" : ""}>
+      Concluído
+    </option>
+
+    <option value="Cancelado"
+      ${agendamento.status === "Cancelado" ? "selected" : ""}>
+      Cancelado
+    </option>
+
+  </select>
+</td>              
+                  </tr>  
               `;
         });
       }
       carregarAgendamentos();
 
-      async function cancelarAgendamento(id) {
-        const confirmar = confirm(
-          "Deseja realmente cancelar este agendamento?",
-        );
-
-        if (!confirmar) return;
+      async function alterarStatus(id, novoStatus) {
+        console.log("ID:", id);
+        console.log("Status:", novoStatus);
 
         const { error } = await clienteSupabase
           .from("Agendamentos")
-          .delete()
+          .update({
+            status: novoStatus,
+          })
           .eq("id", id);
 
         if (error) {
           console.error(error);
-          alert("Erro ao cancelar.");
+          alert("Erro ao atualizar.");
         } else {
-          alert("Agendamento cancelado.");
-
-          tabela.innerHTML = "";
-          carregarAgendamentos();
+          location.reload();
         }
       }
     </script>
