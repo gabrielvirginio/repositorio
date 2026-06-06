@@ -6,7 +6,48 @@
     <title>Painel Admin</title>
   </head>
   <body>
+    <button onclick="toggleFiltros()">Filtros Avançados</button>
+
+    <div id="filtrosAvancados" style="display: none">
+      <input type="search" id="filtroNome" placeholder="Nome" />
+
+      <input type="search" id="filtroTelefone" placeholder="Telefone" />
+
+      <input type="search" id="filtroServico" placeholder="Serviço" />
+
+      <div>
+        <input type="date" id="filtroData" onchange="carregarAgendamentos()" />
+        <button onclick="limparData('filtroData')">✕</button>
+      </div>
+
+      <div>
+        <input type="time" id="filtroHorario" />
+        <button onclick="limparHorario('filtroHorario')">✕</button>
+      </div>
+    </div>
+
+    <button onclick="limparFiltros()">Limpar Filtros</button>
+
+    <div>
+      <button onclick="carregarAgendamentos()">Buscar</button>
+    </div>
+
     <h1>Agendamentos</h1>
+    <input
+      type="search"
+      id="buscaRapida"
+      placeholder="Buscar por nome, telefone ou serviço..."
+      oninput="carregarAgendamentos()"
+    />
+
+    <select id="filtroStatus" onchange="carregarAgendamentos()">
+      <option value="ativos">Ativos</option>
+      <option value="Pendente">Pendente</option>
+      <option value="Confirmado">Confirmado</option>
+      <option value="Concluído">Concluído</option>
+      <option value="Cancelado">Cancelado</option>
+      <option value="todos">Todos</option>
+    </select>
     <table border="1">
       <thead>
         <tr>
@@ -16,7 +57,6 @@
           <th>Data</th>
           <th>Horário</th>
           <th>Status</th>
-          <th>Alterar Status</th>
         </tr>
       </thead>
 
@@ -36,11 +76,68 @@
       );
 
       async function carregarAgendamentos() {
-        const { data, error } = await clienteSupabase
-          .from("Agendamentos")
-          .select("id, nome, telefone, servico, data, horario, status");
+        const buscaRapida = document.getElementById("buscaRapida").value.trim();
+
+        const filtroStatus = document.getElementById("filtroStatus").value;
 
         const tabela = document.getElementById("listaAgendamentos");
+        tabela.innerHTML = "";
+
+        const filtroNome = document.getElementById("filtroNome").value;
+
+        const filtroTelefone = document.getElementById("filtroTelefone").value;
+
+        const filtroServico = document.getElementById("filtroServico").value;
+
+        const filtroData = document.getElementById("filtroData").value;
+
+        const filtroHorario = document.getElementById("filtroHorario").value;
+
+        let consulta = clienteSupabase
+          .from("Agendamentos")
+          .select("id, nome, telefone, servico, data, horario, status")
+          .order("data")
+          .order("horario");
+
+        if (filtroStatus === "ativos") {
+          consulta = consulta.in("status", ["Pendente", "Confirmado"]);
+        } else if (filtroStatus !== "todos") {
+          consulta = consulta.eq("status", filtroStatus);
+        }
+
+        if (buscaRapida) {
+          consulta = consulta.or(
+            `nome.ilike.%${buscaRapida}%,telefone.ilike.%${buscaRapida}%,servico.ilike.%${buscaRapida}%`,
+          );
+        }
+
+        if (filtroNome) {
+          consulta = consulta.ilike("nome", `%${filtroNome}%`);
+        }
+
+        if (filtroTelefone) {
+          consulta = consulta.ilike("telefone", `%${filtroTelefone}%`);
+        }
+
+        if (filtroServico) {
+          consulta = consulta.ilike("servico", `%${filtroServico}%`);
+        }
+
+        if (filtroData) {
+          consulta = consulta.eq("data", filtroData);
+        }
+
+        if (filtroHorario) {
+          consulta = consulta.eq("horario", filtroHorario);
+        }
+        consulta = consulta.order("data").order("horario");
+
+        const { data, error } = await consulta;
+
+        if (error) {
+          console.error(error);
+          return;
+        }
 
         data.forEach((agendamento) => {
           tabela.innerHTML += `
@@ -50,33 +147,31 @@
                   <td>${agendamento.servico}</td>
                   <td>${agendamento.data}</td>
                   <td>${agendamento.horario}</td>
-                  <td>${agendamento.status}</td>
                   <td>
-  <select onchange="alterarStatus(${agendamento.id}, this.value)">
+                    <select onchange="alterarStatus(${agendamento.id}, this.value)">
+                      <option value="Pendente"
+                        ${agendamento.status === "Pendente" ? "selected" : ""}>
+                        Pendente
+                      </option>
 
-    <option value="Pendente"
-      ${agendamento.status === "Pendente" ? "selected" : ""}>
-      Pendente
-    </option>
+                      <option value="Confirmado"
+                        ${agendamento.status === "Confirmado" ? "selected" : ""}>
+                        Confirmado
+                      </option>
 
-    <option value="Confirmado"
-      ${agendamento.status === "Confirmado" ? "selected" : ""}>
-      Confirmado
-    </option>
+                      <option value="Concluído"
+                        ${agendamento.status === "Concluído" ? "selected" : ""}>
+                        Concluído
+                      </option>
 
-    <option value="Concluído"
-      ${agendamento.status === "Concluído" ? "selected" : ""}>
-      Concluído
-    </option>
+                      <option value="Cancelado"
+                        ${agendamento.status === "Cancelado" ? "selected" : ""}>
+                        Cancelado
+                      </option>
 
-    <option value="Cancelado"
-      ${agendamento.status === "Cancelado" ? "selected" : ""}>
-      Cancelado
-    </option>
-
-  </select>
-</td>              
-                  </tr>  
+                    </select>
+                    </td>
+                  </tr>
               `;
         });
       }
@@ -99,6 +194,46 @@
         } else {
           location.reload();
         }
+      }
+
+      function toggleFiltros() {
+        const filtros = document.getElementById("filtrosAvancados");
+
+        if (filtros.style.display === "none") {
+          filtros.style.display = "block";
+        } else {
+          filtros.style.display = "none";
+        }
+      }
+
+      function limparFiltros() {
+        document.getElementById("buscaRapida").value = "";
+
+        document.getElementById("filtroNome").value = "";
+
+        document.getElementById("filtroTelefone").value = "";
+
+        document.getElementById("filtroServico").value = "";
+
+        document.getElementById("filtroData").value = "";
+
+        document.getElementById("filtroHorario").value = "";
+
+        document.getElementById("filtroStatus").value = "ativos";
+
+        carregarAgendamentos();
+      }
+
+      function limparData() {
+        document.getElementById("filtroData").value = "";
+
+        carregarAgendamentos();
+      }
+
+      function limparHorario() {
+        document.getElementById("filtroHorario").value = "";
+
+        carregarAgendamentos();
       }
     </script>
   </body>

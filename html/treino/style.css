@@ -9,7 +9,23 @@
 }
 
 body {
-  background-color: rgb(0, 0, 0);
+  /* Use the salão image as the full-page background */
+  background-image: url("img/salao-img.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+}
+
+/* Dark overlay to keep the page appearance dark without a boxed element */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Navbar Estilos */
@@ -18,7 +34,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #d50080b6;
+  background-color: #d5002e93;
   color: white;
   padding: 2rem 4rem;
 }
@@ -63,11 +79,12 @@ body {
     gap: 10px;
     margin-top: 15px;
   }
-}
+
 
 .img-salao:hover {
   opacity: 40%;
   transition: 1s;
+}
 }
 
 @media (max-width: 900vh) {
@@ -85,10 +102,26 @@ body {
   .img-banner {
     position: absolute;
   }
+
 }
 
 .banner {
   position: relative;
+  height: 100vh; /* make the hero/banner fill the viewport */
+}
+
+/* hide the inline banner image element since the background is applied to the page */
+.banner-img {
+  display: none;
+}
+
+/* ensure main page blocks render above the dark overlay */
+.navbar,
+.banner,
+.servico,
+.img-inicio {
+  position: relative;
+  z-index: 2;
 }
 
 .banner-img img {
@@ -121,6 +154,17 @@ body {
   .txtbanner .inicio-txt1 h1,
   .txtbanner .inicio-txt2 h1 {
     font-size: 1.2rem;
+  }
+}
+
+/* Ajustes para manter os textos do banner visíveis em telas menores */
+@media (max-width: 900px) {
+  .txtbanner {
+    left: 50%;
+    top: 28%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 0 1rem;
   }
 }
 
@@ -172,7 +216,7 @@ body {
 
 .servico {
   overflow: hidden;
-  background-color: #d50080;
+  background-color: #d5002e93;
   padding: 1rem 1rem;
   border-radius: 25px 25px 0 0;
 }
@@ -185,7 +229,7 @@ body {
   text-decoration: none;
   margin-top: 0;
   background-color: white;
-  color: #d50080;
+  color: #d5002e;
   border: none;
   border-radius: 25px;
   padding: 20px 40px;
@@ -212,7 +256,7 @@ body {
 
 .agendar {
   text-decoration: none;
-  color: #d50080;
+  color: #d5002e;
   font-weight: bold;
 }
 
@@ -222,7 +266,7 @@ body {
 }
 
 .agendar:active {
-  color: #d50080;
+  color: #d5002e;
 }
 
 .agendarfixo {
@@ -336,14 +380,14 @@ body {
 
 .campo input:focus,
 .campo textarea:focus {
-  border-color: #d50080;
+  border-color: #d5002e;
   outline: none;
   box-shadow: 0 0 8px rgba(213, 0, 128, 0.18);
 }
 
 .formulario button {
   width: 100%;
-  background-color: #d50080;
+  background-color: #d5002e;
   color: white;
   border: none;
   padding: 14px 20px;
@@ -367,6 +411,13 @@ body {
     padding: 16px 28px;
     font-size: 1rem;
   }
+}
+
+.preto-img {
+  background-color: rgb(0, 0, 0);
+  padding: 20%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .img-inicio {
