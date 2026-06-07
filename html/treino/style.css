@@ -80,11 +80,10 @@ body::before {
     margin-top: 15px;
   }
 
-
-.img-salao:hover {
-  opacity: 40%;
-  transition: 1s;
-}
+  .img-salao:hover {
+    opacity: 40%;
+    transition: 1s;
+  }
 }
 
 @media (max-width: 900vh) {
@@ -102,7 +101,6 @@ body::before {
   .img-banner {
     position: absolute;
   }
-
 }
 
 .banner {
@@ -140,25 +138,25 @@ body::before {
 
 .inicio-txt1 h1,
 .inicio-txt2 h1 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 768px) {
-  .txtbanner .inicio-txt1 h1,
-  .txtbanner .inicio-txt2 h1 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
   .txtbanner .inicio-txt1 h1,
   .txtbanner .inicio-txt2 h1 {
     font-size: 1.2rem;
   }
 }
 
+@media (max-width: 480px) {
+  .txtbanner .inicio-txt1 h1,
+  .txtbanner .inicio-txt2 h1 {
+    font-size: 0.8rem;
+  }
+}
+
 /* Ajustes para manter os textos do banner visíveis em telas menores */
-@media (max-width: 900px) {
+@media (max-width: 1030px) {
   .txtbanner {
     left: 50%;
     top: 28%;
@@ -190,12 +188,13 @@ body::before {
   }
 }
 
-.inicio-txt1 {
+.inicio-txt1 h1 {
   color: #ffffff;
   font-size: auto;
+  font-weight: 400;
 }
 
-.inicio-txt2 {
+.inicio-txt2 h1 {
   color: white;
   font-size: auto;
 }
@@ -218,7 +217,7 @@ body::before {
   overflow: hidden;
   background-color: #d5002e93;
   padding: 1rem 1rem;
-  border-radius: 25px 25px 0 0;
+  border-radius: 0;
 }
 
 .botao {
@@ -418,6 +417,7 @@ body::before {
   padding: 20%;
   padding-top: 0;
   padding-bottom: 0;
+  border-radius: 25px 25px 0 0;
 }
 
 .img-inicio {
@@ -484,22 +484,19 @@ body::before {
 
 /* Container para tornar o mapa responsivo */
 .mapa-container {
-  max-width: 400px;
-  margin: 0 auto;
   margin-top: 2%;
-  padding: 35px;
+  margin-right: 2%;
+  margin-left: 2%;
+
   border-radius: 30px;
   display: flex;
-  align-items: center;
+  align-items: right;
+  justify-content: right;
+  background-color: rgba(0, 0, 0, 0.452);
 }
 
 /* Estilizando o iframe para preencher a div */
 .mapa-container iframe {
-  max-width: 400px;
-  margin: 0 auto;
-  margin-top: 2%;
-  padding: 35px;
-  background-color: white;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -518,12 +515,51 @@ body::before {
 .contatos {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 15%;
+  margin-left: 7%;
   gap: 10px;
+  background-color: #d5002e8c;
+  padding: 20px;
+  border-radius: 30px;
+  margin-bottom: 15%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.txt-contatos p {
+  text-align: center;
+  margin-bottom: 10%;
+  top: 10%;
+  font-weight: 600;
+}
+
+.contatos .zap,
+.tel,
+.email {
+  display: flex;
+  text-align: left;
+  gap: 5px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .contatos p {
   color: white;
   font-size: 1.5rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 .contatos img {
@@ -531,23 +567,14 @@ body::before {
   max-width: 30px;
 }
 
-.contatos .zap {
-  display: flex;
-  justify-content: stretch;
-  text-align: left;
-  gap: 5px;
+.zap p {
+  color: rgb(0, 255, 34);
 }
 
-.contatos .tel {
-  display: flex;
-  justify-content: stretch;
-  text-align: left;
-  gap: 5px;
+.tel p {
+  color: rgb(0, 0, 0);
 }
 
-.contatos .email {
-  display: flex;
-  justify-content: stretch;
-  text-align: left;
-  gap: 5px;
+.email p {
+  color: rgb(245, 6, 6);
 }

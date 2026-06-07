@@ -1,37 +1,59 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+      .Pendente {
+        background-color: #ffcc26;
+      }
+
+      .Confirmado {
+        background-color: #3ef357;
+      }
+
+      .Concluído {
+        background-color: #368dff;
+      }
+
+      .Cancelado {
+        background-color: #ff1225;
+      }
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel Admin</title>
   </head>
   <body>
-    <button onclick="toggleFiltros()">Filtros Avançados</button>
+    <div class="filtro-avan">
+      <button onclick="toggleFiltros()">Filtros Avançados</button>
 
-    <div id="filtrosAvancados" style="display: none">
-      <input type="search" id="filtroNome" placeholder="Nome" />
+      <div id="filtrosAvancados" style="display: none">
+        <input type="search" id="filtroNome" placeholder="Nome" />
 
-      <input type="search" id="filtroTelefone" placeholder="Telefone" />
+        <input type="search" id="filtroTelefone" placeholder="Telefone" />
 
-      <input type="search" id="filtroServico" placeholder="Serviço" />
+        <input type="search" id="filtroServico" placeholder="Serviço" />
 
-      <div>
-        <input type="date" id="filtroData" onchange="carregarAgendamentos()" />
-        <button onclick="limparData('filtroData')">✕</button>
+        <div>
+          <input
+            type="date"
+            id="filtroData"
+            onchange="carregarAgendamentos()"
+          />
+          <button onclick="limparData('filtroData')">✕</button>
+        </div>
+
+        <div>
+          <input type="time" id="filtroHorario" />
+          <button onclick="limparHorario('filtroHorario')">✕</button>
+        </div>
       </div>
 
+      <button onclick="limparFiltros()">Limpar Filtros</button>
+
       <div>
-        <input type="time" id="filtroHorario" />
-        <button onclick="limparHorario('filtroHorario')">✕</button>
+        <button onclick="carregarAgendamentos()">Buscar</button>
       </div>
     </div>
-
-    <button onclick="limparFiltros()">Limpar Filtros</button>
-
-    <div>
-      <button onclick="carregarAgendamentos()">Buscar</button>
-    </div>
-
     <h1>Agendamentos</h1>
     <input
       type="search"
@@ -133,6 +155,11 @@
         consulta = consulta.order("data").order("horario");
 
         const { data, error } = await consulta;
+        const hoje = [];
+
+        const amanha = [];
+
+        const proximosDias = [];
 
         if (error) {
           console.error(error);
@@ -140,39 +167,130 @@
         }
 
         data.forEach((agendamento) => {
+          const grupo = obterTituloData(agendamento.data);
+
+          if (grupo === "Hoje") {
+            hoje.push(agendamento);
+          } else if (grupo === "Amanhã") {
+            amanha.push(agendamento);
+          } else {
+            proximosDias.push(agendamento);
+          }
+        });
+
+        renderizarGrupo("Hoje", hoje, tabela);
+
+        renderizarGrupo("Amanhã", amanha, tabela);
+
+        renderizarGrupo("Próximos Dias", proximosDias, tabela);
+      }
+
+      function obterTituloData(dataBanco) {
+        const hoje = new Date();
+
+        const ano = hoje.getFullYear();
+        const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+        const dia = String(hoje.getDate()).padStart(2, "0");
+
+        const hojeFormatado = `${ano}-${mes}-${dia}`;
+
+        const amanha = new Date();
+        amanha.setDate(amanha.getDate() + 1);
+
+        const anoAmanha = amanha.getFullYear();
+        const mesAmanha = String(amanha.getMonth() + 1).padStart(2, "0");
+        const diaAmanha = String(amanha.getDate()).padStart(2, "0");
+
+        const amanhaFormatado = `${anoAmanha}-${mesAmanha}-${diaAmanha}`;
+
+        if (dataBanco === hojeFormatado) {
+          return "Hoje";
+        }
+
+        if (dataBanco === amanhaFormatado) {
+          return "Amanhã";
+        }
+
+        return "Próximos Dias";
+      }
+
+      /*expandir grupo*/
+      function alternarGrupo(idGrupo) {
+        const linhas = document.querySelectorAll(`.${idGrupo}`);
+
+        linhas.forEach((linha) => {
+          if (linha.style.display === "none") {
+            linha.style.display = "";
+          } else {
+            linha.style.display = "none";
+          }
+        });
+      }
+      function renderizarGrupo(titulo, registros, tabela) {
+        const idGrupo = titulo.replace(/\s+/g, "");
+        if (registros.length === 0) return;
+
+        tabela.innerHTML += `
+        <tr>
+          <td
+            colspan="6"
+            style="cursor:pointer"
+            onclick="alternarGrupo('${idGrupo}')"
+          >
+            <strong>
+              📅 ${titulo} (${registros.length})
+            </strong>
+          </td>
+        </tr>
+        `;
+
+        registros.sort((a, b) => a.horario.localeCompare(b.horario));
+
+        registros.forEach((agendamento) => {
           tabela.innerHTML += `
-                  <tr>
-                  <td>${agendamento.nome}</td>
-                  <td>${agendamento.telefone}</td>
-                  <td>${agendamento.servico}</td>
-                  <td>${agendamento.data}</td>
-                  <td>${agendamento.horario}</td>
-                  <td>
-                    <select onchange="alterarStatus(${agendamento.id}, this.value)">
-                      <option value="Pendente"
-                        ${agendamento.status === "Pendente" ? "selected" : ""}>
-                        Pendente
-                      </option>
+      <tr class="${idGrupo}">
+        <td>${agendamento.nome}</td>
+        <td>${agendamento.telefone}</td>
+        <td>${agendamento.servico}</td>
+        <td>${agendamento.data}</td>
+        <td>${agendamento.horario}</td>
 
-                      <option value="Confirmado"
-                        ${agendamento.status === "Confirmado" ? "selected" : ""}>
-                        Confirmado
-                      </option>
+        <td>
+          <select class="${agendamento.status}"
+           onchange="alterarStatus(${agendamento.id}, this.value)">
 
-                      <option value="Concluído"
-                        ${agendamento.status === "Concluído" ? "selected" : ""}>
-                        Concluído
-                      </option>
+            <option value="Pendente"
+              ${agendamento.status === "Pendente" ? "selected" : ""}>
+              Pendente
+            </option>
 
-                      <option value="Cancelado"
-                        ${agendamento.status === "Cancelado" ? "selected" : ""}>
-                        Cancelado
-                      </option>
+            <option value="Confirmado"
+              ${agendamento.status === "Confirmado" ? "selected" : ""}>
+              Confirmado
+            </option>
 
-                    </select>
-                    </td>
-                  </tr>
-              `;
+            <option value="Concluído"
+              ${agendamento.status === "Concluído" ? "selected" : ""}>
+              Concluído
+            </option>
+
+            <option value="Cancelado"
+              ${agendamento.status === "Cancelado" ? "selected" : ""}>
+              Cancelado
+            </option>
+
+          </select>
+        </td>
+      </tr>
+    `;
+        });
+
+        registros.forEach((agendamento) => {
+          tabela.innerHTML += `
+    <tr>
+      ...
+    </tr>
+  `;
         });
       }
       carregarAgendamentos();
