@@ -1,253 +1,275 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <style>
-      .Pendente {
-        background-color: #ffcc26;
-      }
 
-      .Confirmado {
-        background-color: #3ef357;
-      }
+<head>
+  <style>
+    .Pendente {
+      background-color: #ffcc26;
+    }
 
-      .Concluído {
-        background-color: #368dff;
-      }
+    .Confirmado {
+      background-color: #3ef357;
+    }
 
-      .Cancelado {
-        background-color: #ff1225;
-      }
-    </style>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Painel Admin</title>
-  </head>
-  <body>
-    <div class="filtro-avan">
-      <button onclick="toggleFiltros()">Filtros Avançados</button>
+    .Concluído {
+      background-color: #368dff;
+    }
 
-      <div id="filtrosAvancados" style="display: none">
-        <input type="search" id="filtroNome" placeholder="Nome" />
+    .Cancelado {
+      background-color: #ff1225;
+    }
+  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin</title>
+</head>
 
-        <input type="search" id="filtroTelefone" placeholder="Telefone" />
+<body>
+  <div class="filtro-avan">
+    <button onclick="toggleFiltros()">Filtros Avançados</button>
 
-        <input type="search" id="filtroServico" placeholder="Serviço" />
+    <div id="filtrosAvancados" style="display: none">
+      <input type="search" id="filtroNome" placeholder="Nome" />
 
-        <div>
-          <input
-            type="date"
-            id="filtroData"
-            onchange="carregarAgendamentos()"
-          />
-          <button onclick="limparData('filtroData')">✕</button>
-        </div>
+      <input type="search" id="filtroTelefone" placeholder="Telefone" />
 
-        <div>
-          <input type="time" id="filtroHorario" />
-          <button onclick="limparHorario('filtroHorario')">✕</button>
-        </div>
-      </div>
-
-      <button onclick="limparFiltros()">Limpar Filtros</button>
+      <input type="search" id="filtroServico" placeholder="Serviço" />
 
       <div>
-        <button onclick="carregarAgendamentos()">Buscar</button>
+        <input type="date" id="filtroData" onchange="carregarAgendamentos()" />
+        <button onclick="limparData('filtroData')">✕</button>
+      </div>
+
+      <div>
+        <input type="time" id="filtroHorario" />
+        <button onclick="limparHorario('filtroHorario')">✕</button>
       </div>
     </div>
-    <h1>Agendamentos</h1>
-    <input
-      type="search"
-      id="buscaRapida"
-      placeholder="Buscar por nome, telefone ou serviço..."
-      oninput="carregarAgendamentos()"
-    />
 
-    <select id="filtroStatus" onchange="carregarAgendamentos()">
-      <option value="ativos">Ativos</option>
-      <option value="Pendente">Pendente</option>
-      <option value="Confirmado">Confirmado</option>
-      <option value="Concluído">Concluído</option>
-      <option value="Cancelado">Cancelado</option>
-      <option value="todos">Todos</option>
-    </select>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>Serviço</th>
-          <th>Data</th>
-          <th>Horário</th>
-          <th>Status</th>
-        </tr>
-      </thead>
+    <button onclick="limparFiltros()">Limpar Filtros</button>
 
-      <tbody id="listaAgendamentos"></tbody>
-    </table>
+    <div>
+      <button onclick="carregarAgendamentos()">Buscar</button>
+    </div>
+  </div>
+  <h1>Agendamentos</h1>
+  <input type="search" id="buscaRapida" placeholder="Buscar por nome, telefone ou serviço..."
+    oninput="carregarAgendamentos()" />
 
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <select id="filtroStatus" onchange="carregarAgendamentos()">
+    <option value="ativos">Ativos</option>
+    <option value="Pendente">Pendente</option>
+    <option value="Confirmado">Confirmado</option>
+    <option value="Concluído">Concluído</option>
+    <option value="Cancelado">Cancelado</option>
+    <option value="todos">Todos</option>
+  </select>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Serviço</th>
+        <th>Data</th>
+        <th>Horário</th>
+        <th>Status</th>
+      </tr>
+    </thead>
 
-    <script>
-      const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
-      const supabaseKey =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
+    <tbody id="listaAgendamentos"></tbody>
+  </table>
 
-      const clienteSupabase = window.supabase.createClient(
-        supabaseUrl,
-        supabaseKey,
-      );
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
-      async function carregarAgendamentos() {
-        const buscaRapida = document.getElementById("buscaRapida").value.trim();
+  <script>
+    const supabaseUrl = "https://fipablognksvoeqwcjib.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpcGFibG9nbmtzdm9lcXdjamliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MjYxODksImV4cCI6MjA5NTUwMjE4OX0.ZHod0PNQ3SOptzzqnX8jkOWeCJTLtW4GEH2FzthiZVQ";
 
-        const filtroStatus = document.getElementById("filtroStatus").value;
+    const clienteSupabase = window.supabase.createClient(
+      supabaseUrl,
+      supabaseKey,
+    );
 
-        const tabela = document.getElementById("listaAgendamentos");
-        tabela.innerHTML = "";
 
-        const filtroNome = document.getElementById("filtroNome").value;
+    async function carregarAgendamentos() {
+      const buscaRapida = document.getElementById("buscaRapida").value.trim();
 
-        const filtroTelefone = document.getElementById("filtroTelefone").value;
+      const filtroStatus = document.getElementById("filtroStatus").value;
 
-        const filtroServico = document.getElementById("filtroServico").value;
+      const tabela = document.getElementById("listaAgendamentos");
+      tabela.innerHTML = "";
 
-        const filtroData = document.getElementById("filtroData").value;
+      const filtroNome = document.getElementById("filtroNome").value;
 
-        const filtroHorario = document.getElementById("filtroHorario").value;
+      const filtroTelefone = document.getElementById("filtroTelefone").value;
 
-        let consulta = clienteSupabase
-          .from("Agendamentos")
-          .select("id, nome, telefone, servico, data, horario, status")
-          .order("data")
-          .order("horario");
+      const filtroServico = document.getElementById("filtroServico").value;
 
-        if (filtroStatus === "ativos") {
-          consulta = consulta.in("status", ["Pendente", "Confirmado"]);
-        } else if (filtroStatus !== "todos") {
-          consulta = consulta.eq("status", filtroStatus);
-        }
+      const filtroData = document.getElementById("filtroData").value;
 
-        if (buscaRapida) {
-          consulta = consulta.or(
-            `nome.ilike.%${buscaRapida}%,telefone.ilike.%${buscaRapida}%,servico.ilike.%${buscaRapida}%`,
-          );
-        }
+      const filtroHorario = document.getElementById("filtroHorario").value;
 
-        if (filtroNome) {
-          consulta = consulta.ilike("nome", `%${filtroNome}%`);
-        }
+      let consulta = clienteSupabase
+        .from("Agendamentos")
+        .select("id, nome, telefone, servico, data, horario, status")
+        .order("data")
+        .order("horario");
 
-        if (filtroTelefone) {
-          consulta = consulta.ilike("telefone", `%${filtroTelefone}%`);
-        }
-
-        if (filtroServico) {
-          consulta = consulta.ilike("servico", `%${filtroServico}%`);
-        }
-
-        if (filtroData) {
-          consulta = consulta.eq("data", filtroData);
-        }
-
-        if (filtroHorario) {
-          consulta = consulta.eq("horario", filtroHorario);
-        }
-        consulta = consulta.order("data").order("horario");
-
-        const { data, error } = await consulta;
-        const hoje = [];
-
-        const amanha = [];
-
-        const proximosDias = [];
-
-        if (error) {
-          console.error(error);
-          return;
-        }
-
-        data.forEach((agendamento) => {
-          const grupo = obterTituloData(agendamento.data);
-
-          if (grupo === "Hoje") {
-            hoje.push(agendamento);
-          } else if (grupo === "Amanhã") {
-            amanha.push(agendamento);
-          } else {
-            proximosDias.push(agendamento);
-          }
-        });
-
-        renderizarGrupo("Hoje", hoje, tabela);
-
-        renderizarGrupo("Amanhã", amanha, tabela);
-
-        renderizarGrupo("Próximos Dias", proximosDias, tabela);
+      if (filtroStatus === "ativos") {
+        consulta = consulta.in("status", ["Pendente", "Confirmado"]);
+      } else if (filtroStatus !== "todos") {
+        consulta = consulta.eq("status", filtroStatus);
       }
 
-      function obterTituloData(dataBanco) {
-        const hoje = new Date();
-
-        const ano = hoje.getFullYear();
-        const mes = String(hoje.getMonth() + 1).padStart(2, "0");
-        const dia = String(hoje.getDate()).padStart(2, "0");
-
-        const hojeFormatado = `${ano}-${mes}-${dia}`;
-
-        const amanha = new Date();
-        amanha.setDate(amanha.getDate() + 1);
-
-        const anoAmanha = amanha.getFullYear();
-        const mesAmanha = String(amanha.getMonth() + 1).padStart(2, "0");
-        const diaAmanha = String(amanha.getDate()).padStart(2, "0");
-
-        const amanhaFormatado = `${anoAmanha}-${mesAmanha}-${diaAmanha}`;
-
-        if (dataBanco === hojeFormatado) {
-          return "Hoje";
-        }
-
-        if (dataBanco === amanhaFormatado) {
-          return "Amanhã";
-        }
-
-        return "Próximos Dias";
+      if (buscaRapida) {
+        consulta = consulta.or(
+          `nome.ilike.%${buscaRapida}%,telefone.ilike.%${buscaRapida}%,servico.ilike.%${buscaRapida}%`,
+        );
       }
 
-      /*expandir grupo*/
-      function alternarGrupo(idGrupo) {
-        const linhas = document.querySelectorAll(`.${idGrupo}`);
-
-        linhas.forEach((linha) => {
-          if (linha.style.display === "none") {
-            linha.style.display = "";
-          } else {
-            linha.style.display = "none";
-          }
-        });
+      if (filtroNome) {
+        consulta = consulta.ilike("nome", `%${filtroNome}%`);
       }
-      function renderizarGrupo(titulo, registros, tabela) {
-        const idGrupo = titulo.replace(/\s+/g, "");
-        if (registros.length === 0) return;
 
+      if (filtroTelefone) {
+        consulta = consulta.ilike("telefone", `%${filtroTelefone}%`);
+      }
+
+      if (filtroServico) {
+        consulta = consulta.ilike("servico", `%${filtroServico}%`);
+      }
+
+      if (filtroData) {
+        consulta = consulta.eq("data", filtroData);
+      }
+
+      if (filtroHorario) {
+        consulta = consulta.eq("horario", filtroHorario);
+      }
+      consulta = consulta.order("data").order("horario");
+
+      const { data, error } = await consulta;
+      const hoje = [];
+
+      const amanha = [];
+
+      const proximosDias = [];
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      data.forEach((agendamento) => {
+        const grupo = obterTituloData(agendamento.data);
+
+        if (grupo === "Hoje") {
+          hoje.push(agendamento);
+        } else if (grupo === "Amanhã") {
+          amanha.push(agendamento);
+        } else {
+          proximosDias.push(agendamento);
+        }
+      });
+
+      renderizarGrupo("Hoje", hoje, tabela);
+
+      renderizarGrupo("Amanhã", amanha, tabela);
+
+      renderizarGrupo("Próximos Dias", proximosDias, tabela);
+    }
+
+    function obterTituloData(dataBanco) {
+      const hoje = new Date();
+
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+      const dia = String(hoje.getDate()).padStart(2, "0");
+
+      const hojeFormatado = `${ano}-${mes}-${dia}`;
+
+      const amanha = new Date();
+      amanha.setDate(amanha.getDate() + 1);
+
+      const anoAmanha = amanha.getFullYear();
+      const mesAmanha = String(amanha.getMonth() + 1).padStart(2, "0");
+      const diaAmanha = String(amanha.getDate()).padStart(2, "0");
+
+      const amanhaFormatado = `${anoAmanha}-${mesAmanha}-${diaAmanha}`;
+
+      if (dataBanco === hojeFormatado) {
+        return "Hoje";
+      }
+
+      if (dataBanco === amanhaFormatado) {
+        return "Amanhã";
+      }
+
+      return "Próximos Dias";
+    }
+
+    /*expandir grupo*/
+    function alternarGrupo(idGrupo) {
+
+      // inverte o estado
+      estadoGrupos[idGrupo] = !estadoGrupos[idGrupo];
+
+      // pega todas as linhas do grupo
+      const linhas = document.querySelectorAll(`.${idGrupo}`);
+
+      // mostra ou esconde
+      linhas.forEach((linha) => {
+        linha.style.display = estadoGrupos[idGrupo] ? '' : 'none';
+      });
+
+      // atualiza o ícone do cabeçalho
+      const icone = document.getElementById(`icone-${idGrupo}`);
+
+      if (icone) {
+        icone.textContent = estadoGrupos[idGrupo] ? '▼' : '▶';
+      }
+    }
+
+    const estadoGrupos = {
+      Hoje: true,
+      Amanhã: true,
+      PróximosDias: true
+    };
+    function renderizarGrupo(titulo, registros, tabela) {
+      const idGrupo = titulo.replace(/\s+/g, "");
+      if (registros.length === 0) return;
+
+      tabela.innerHTML += `
+      <style>
+  td[colspan="6"] {
+    padding: 12px;
+    font-size: 16px;
+    user-select: none;
+  }
+
+  td[colspan="6"]:hover {
+    background: #ececec !important;
+  }
+</style>
+      <tr>
+        <td
+          colspan="6"
+          style="cursor:pointer; background:#f5f5f5;"
+          onclick="alternarGrupo('${idGrupo}')"
+        >
+          <strong>
+            <span id="icone-${idGrupo}">▼</span>
+            📅 ${titulo} (${registros.length})
+          </strong>
+        </td>
+      </tr>
+      `;
+
+      registros.sort((a, b) => a.horario.localeCompare(b.horario));
+
+      registros.forEach((agendamento) => {
         tabela.innerHTML += `
-        <tr>
-          <td
-            colspan="6"
-            style="cursor:pointer"
-            onclick="alternarGrupo('${idGrupo}')"
-          >
-            <strong>
-              📅 ${titulo} (${registros.length})
-            </strong>
-          </td>
-        </tr>
-        `;
-
-        registros.sort((a, b) => a.horario.localeCompare(b.horario));
-
-        registros.forEach((agendamento) => {
-          tabela.innerHTML += `
       <tr class="${idGrupo}">
         <td>${agendamento.nome}</td>
         <td>${agendamento.telefone}</td>
@@ -283,76 +305,77 @@
         </td>
       </tr>
     `;
-        });
+      });
 
-        registros.forEach((agendamento) => {
-          tabela.innerHTML += `
+      registros.forEach((agendamento) => {
+        tabela.innerHTML += `
     <tr>
       ...
     </tr>
   `;
-        });
+      });
+    }
+    carregarAgendamentos();
+
+    async function alterarStatus(id, novoStatus) {
+      console.log("ID:", id);
+      console.log("Status:", novoStatus);
+
+      const { error } = await clienteSupabase
+        .from("Agendamentos")
+        .update({
+          status: novoStatus,
+        })
+        .eq("id", id);
+
+      if (error) {
+        console.error(error);
+        alert("Erro ao atualizar.");
+      } else {
+        location.reload();
       }
+    }
+
+    function toggleFiltros() {
+      const filtros = document.getElementById("filtrosAvancados");
+
+      if (filtros.style.display === "none") {
+        filtros.style.display = "block";
+      } else {
+        filtros.style.display = "none";
+      }
+    }
+
+    function limparFiltros() {
+      document.getElementById("buscaRapida").value = "";
+
+      document.getElementById("filtroNome").value = "";
+
+      document.getElementById("filtroTelefone").value = "";
+
+      document.getElementById("filtroServico").value = "";
+
+      document.getElementById("filtroData").value = "";
+
+      document.getElementById("filtroHorario").value = "";
+
+      document.getElementById("filtroStatus").value = "ativos";
+
       carregarAgendamentos();
+    }
 
-      async function alterarStatus(id, novoStatus) {
-        console.log("ID:", id);
-        console.log("Status:", novoStatus);
+    function limparData() {
+      document.getElementById("filtroData").value = "";
 
-        const { error } = await clienteSupabase
-          .from("Agendamentos")
-          .update({
-            status: novoStatus,
-          })
-          .eq("id", id);
+      carregarAgendamentos();
+    }
 
-        if (error) {
-          console.error(error);
-          alert("Erro ao atualizar.");
-        } else {
-          location.reload();
-        }
-      }
+    function limparHorario() {
+      document.getElementById("filtroHorario").value = "";
 
-      function toggleFiltros() {
-        const filtros = document.getElementById("filtrosAvancados");
+      carregarAgendamentos();
+    }
+  </script>
+</body>
 
-        if (filtros.style.display === "none") {
-          filtros.style.display = "block";
-        } else {
-          filtros.style.display = "none";
-        }
-      }
-
-      function limparFiltros() {
-        document.getElementById("buscaRapida").value = "";
-
-        document.getElementById("filtroNome").value = "";
-
-        document.getElementById("filtroTelefone").value = "";
-
-        document.getElementById("filtroServico").value = "";
-
-        document.getElementById("filtroData").value = "";
-
-        document.getElementById("filtroHorario").value = "";
-
-        document.getElementById("filtroStatus").value = "ativos";
-
-        carregarAgendamentos();
-      }
-
-      function limparData() {
-        document.getElementById("filtroData").value = "";
-
-        carregarAgendamentos();
-      }
-
-      function limparHorario() {
-        document.getElementById("filtroHorario").value = "";
-
-        carregarAgendamentos();
-      }
-    </script>
-  </body>
 </html>
